@@ -42,6 +42,10 @@
                         align: 'center'
                     },
                     {
+                        title: '序号',
+                        key: 'rowIndex'
+                    },
+                    {
                         title: '第一列',
                         key: 'col1',
                         render: (h, params) => {
@@ -144,6 +148,7 @@
                 data: [
                     {
                         col0: 0,
+                        rowIndex:1,
                         col1: 'Table Demo',
                         col2: '',
                         col3: ''
@@ -153,10 +158,16 @@
         },
         methods: {
             addRow(rowData){
-                console.log(rowData)
                 this.uniqueKey ++
+                let rowIndex = 0
+                if(this.data.length ==0){
+                    rowIndex = 1;
+                }else {
+                    rowIndex = parseInt(this.data[this.data.length-1].rowIndex) + 1
+                }
                 let em = {
                     col0: this.uniqueKey,
+                    rowIndex: rowIndex,
                     col1: rowData.row.col1,
                     col2: rowData.row.col2,
                     col3: rowData.row.col3
@@ -167,8 +178,15 @@
             },
             handleAdd() {
                 this.uniqueKey ++
+                let rowIndex = 0
+                if(this.data.length ==0){
+                    rowIndex = 1;
+                }else {
+                    rowIndex = parseInt(this.data[this.data.length-1].rowIndex) + 1
+                }
                 let item = {
                     col0: this.uniqueKey,
+                    rowIndex:rowIndex,
                     col1: '',
                     col2: '',
                     col3: ''
@@ -179,6 +197,7 @@
             remove (index) {
                 this.data.splice(index, 1);
                 this.reduceTableHeight()
+                this.reorderIndex()
             },
             handleSelectAll (status) {
                 this.$refs.selection.selectAll(status);
@@ -216,10 +235,10 @@
                 return rowIndex;
             },
             setTableHeight() {
-                this.tableHight =  (parseInt(this.tableHight) + 50) + ''
+                this.tableHight =  (parseInt(this.tableHight) + 45) + ''
             },
             reduceTableHeight() {
-                this.tableHight =  (parseInt(this.tableHight) - 50) + ''
+                this.tableHight =  (parseInt(this.tableHight) - 45) + ''
             },
             exchangeData (flag){
                 if (this.rowData.length === 0 || this.rowData.length > 1) {
@@ -252,6 +271,11 @@
                 this.data[rowIndex].col1 = tempData.col1
                 this.data[rowIndex].col2 = tempData.col2
                 this.data[rowIndex].col3 = tempData.col3
+            },
+            reorderIndex(){
+                for(let i in this.data) {
+                    this.data[i].rowIndex = parseInt(i) + 1
+                }
             }
         }
     }
