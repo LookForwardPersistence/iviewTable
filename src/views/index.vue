@@ -1,20 +1,20 @@
 <template>
     <div style="margin:20px;">
         <Table border ref="selection" :columns="columns" :data="data" v-on:on-select="getSelectData" v-on:on-select-cancel="removeData" :height="tableHight">
-        <div slot="footer" class="footer-row">
-            <div class="total-row"> 汇总：{{total}}</div>
-        </div>
+            <div slot="footer" class="footer-row">
+                <div class="total-row"> 汇总：{{total}}</div>
+            </div>
         </Table>
 
         <div class="button-group">
-        <ButtonGroup style="margin-top: 10px">
-           <!-- <Button type="primary" @click="handleSelectAll(true)">全选</Button>
-            <Button type="info" @click="handleSelectAll(false)">全都不选</Button>
-            <Button type="primary" icon="plus"  title="获取tableData" @click="handlSelectAll">获取tableData</Button>-->
-            <Button type="primary" icon="ios-add-circle-outline"  title="新增行" @click="handleAdd">新增</Button>
-            <Button type="info" icon="md-arrow-up" title="上移" @click.native="handleUp">上移</Button>
-            <Button type="primary" icon="md-arrow-down"  title="下移" @click.native="handleDown">下移</Button>
-        </ButtonGroup>
+            <ButtonGroup style="margin-top: 10px">
+                <!-- <Button type="primary" @click="handleSelectAll(true)">全选</Button>
+                 <Button type="info" @click="handleSelectAll(false)">全都不选</Button>
+                 <Button type="primary" icon="plus"  title="获取tableData" @click="handlSelectAll">获取tableData</Button>-->
+                <Button type="primary" icon="ios-add-circle-outline"  title="新增行" @click="handleAdd">新增</Button>
+                <Button type="info" icon="md-arrow-up" title="上移" @click.native="handleUp">上移</Button>
+                <Button type="primary" icon="md-arrow-down"  title="下移" @click.native="handleDown">下移</Button>
+            </ButtonGroup>
         </div>
     </div>
 </template>
@@ -64,28 +64,28 @@
                         key: 'col2',
                         render: (h,params) => {
                             return h('Select',{
-                                props:{
-                                    value: this.data[params.index].col2
-                                },
-                                on:{
-                                    'on-change': (event) => {
-                                        console.log(event)
-                                        this.data[params.index].col2 = event
-                                    }
-                                }
-                            },
-                            [
-                                h('Option',{
                                     props:{
-                                        value: '0'
+                                        value: this.data[params.index].col2
+                                    },
+                                    on:{
+                                        'on-change': (event) => {
+                                            console.log(event)
+                                            this.data[params.index].col2 = event
+                                        }
                                     }
-                                },'男'),
+                                },
+                                [
+                                    h('Option',{
+                                        props:{
+                                            value: '0'
+                                        }
+                                    },'男'),
                                     h('Option',{
                                         props:{
                                             value: '1'
                                         }
                                     },'女')
-                                    ]
+                                ]
                             )
                         }
                     },
@@ -94,19 +94,19 @@
                         key: 'col3',
                         render: (h, params) => {
                             return h('Input',{
-                                    props: {
-                                        type:'text',
-                                        value: this.data[params.index].col3
-                                    },
-                                    style:{
-                                        width: 80
-                                    },
-                                    on:{
-                                        'on-blur': (em)=>{
-                                            this.data[params.index].col3 = em.target.value
-                                        }
+                                props: {
+                                    type:'text',
+                                    value: this.data[params.index].col3
+                                },
+                                style:{
+                                    width: 80
+                                },
+                                on:{
+                                    'on-blur': (em)=>{
+                                        this.data[params.index].col3 = em.target.value
                                     }
-                                })
+                                }
+                            })
                         }
                     },
                     {
@@ -207,12 +207,12 @@
                 console.log(this.data)
             },
             handleUp() {
-                 // var { ...temp } = this.data[tempIndex]//深拷贝 扩展运算符
+                // var { ...temp } = this.data[tempIndex]//深拷贝 扩展运算符
                 this.exchangeData('up')
             },
             handleDown () {
                 this.exchangeData('down')
-              console.log('handleDown')
+                console.log('handleDown')
                 console.log(this.$refs.selection)
             },
             getSelectData (selection,row) {
