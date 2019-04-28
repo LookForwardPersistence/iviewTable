@@ -11,6 +11,7 @@
                 <!-- <Button type="primary" @click="handleSelectAll(true)">全选</Button>
                  <Button type="info" @click="handleSelectAll(false)">全都不选</Button>
                  <Button type="primary" icon="plus"  title="获取tableData" @click="handlSelectAll">获取tableData</Button>-->
+                <!--<title>Test</title>-->
                 <Button type="primary" icon="ios-add-circle-outline"  title="新增行" @click="handleAdd">新增</Button>
                 <Button type="info" icon="md-arrow-up" title="上移" @click.native="handleUp">上移</Button>
                 <Button type="primary" icon="md-arrow-down"  title="下移" @click.native="handleDown">下移</Button>
